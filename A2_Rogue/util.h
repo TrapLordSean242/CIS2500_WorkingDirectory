@@ -6,12 +6,12 @@
 
 /*requirements:
 -open a file
--parse room descriptions
+-parse room descriptions**
     -whole file
     -by lines
-- initialize ncurses
-- draws level to screen
--parse user input
+- initialize ncurses**
+- draws level to screen**
+-parse user input**
 -update screen
 -clean up ncurses
 -print gold
