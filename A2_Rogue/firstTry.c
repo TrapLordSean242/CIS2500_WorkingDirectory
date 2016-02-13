@@ -19,17 +19,17 @@ void parseLine(char* path);
 //}runes;
 int main(int argc, char* argv[])
 {
-/*roomPtr* room;
-room = malloc(sizeof(roomPtr))
-//runesPtr* runes;
-//runes = malloc(sizeof(itemPtr))*/
-parseLine(argv[1]);
+  /*roomPtr* room;
+    room = malloc(sizeof(roomPtr))
+    //runesPtr* runes;
+    //runes = malloc(sizeof(itemPtr))*/
+  parseLine(argv[1]);
 
 
-//levelPars(room, runes);
+  //levelPars(room, runes);
 
-//free(roomPtr)
-//free(itemPtr)
+  //free(roomPtr)
+  //free(itemPtr)
 
 
   return 0;
@@ -37,9 +37,16 @@ parseLine(argv[1]);
 
 void parseLine(char* path)
 {
-    char* allFile[150];
-    FILE *textFile; 
-    char* saveStuff[12];
+    char allFile[150];
+    FILE *textFile;
+    char* stuff;
+    char* cstuff;
+    int roomx;
+    int roomy;
+    int stuffx;
+    int stuffy;
+    char dump;
+    char comma;
     textFile = fopen(path, "r");
     if(textFile == NULL)
     {
@@ -48,18 +55,28 @@ void parseLine(char* path)
     }
     while(fgets(allFile, 150,textFile) != NULL);
     {
-        char* stuff = strtok(allFile, "X");
-        printf("%s\n", stuff);
-        stuff= strtok(NULL, ",");
-        printf("%s\n", stuff);        
-        while((stuff = strtok(NULL, " ")) != NULL);
-        {
-           char* cstuff = strtok(NULL, " ");
-           cstuff = strtok (NULL, ",");
-            //cstuff = strtok(NULL, "\n");
-           printf("%s\n", cstuff);
-      
-        }
+      printf("%s\n", allFile);
+      /* get the dimensions of the room */
+      stuff = strtok(allFile, " ");
+      /* printf("%s\n", stuff); */
+      /* sscanf(stuff, "%d%c%d", &roomx, &dump, &roomy); */
+
+      /* /\* Parse the rest of the tokens *\/ */
+      /* printf("%d %d\n", roomx, roomy); */
+      /* stuff = strtok(NULL, " "); */
+      while(stuff != NULL);
+      {
+	printf("%s\n", stuff);
+	stuff = strtok(NULL, " ");
+	/* if(stuff[0] != 'd') */
+	/*   { */
+	/*     sscanf(stuff, "%c%d%c%d", &dump, &stuffx, &comma, &stuffy);  */
+	/*     printf("%c%d%c%d",  dump,  stuffx,  comma,  stuffy ); */
+	/*   } */
+	/* else */
+	/*   { */
+	/*   } */
+      }
     }
 }
     
