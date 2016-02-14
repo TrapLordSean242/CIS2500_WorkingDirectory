@@ -2,11 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "util.h"
+#include <ncurses.h>
+void printGrids();
+//void initCurses();
 void parseLine(char* path);
 void addDungeonElement(Rooms* room, DungeonElement* element);
 int main(int argc, char* argv[])
 {
   parseLine(argv[1]);
+ // initCurses();
 }
 void parseLine(char* path)
 {
@@ -63,6 +67,7 @@ void parseLine(char* path)
 	switch(dump){
 	case 'd':
 	  dunElement = malloc(sizeof(DungeonElement));
+          break;
 	  switch(direction)
 	    {
 	    case 'n':
@@ -97,11 +102,13 @@ void parseLine(char* path)
 	typeGold->goldY=stuffx;
 	typeGold->goldX=stuffy;
 	printf("Gold X: %d\n", typeGold->goldX=stuffy);
+        break;
 	default:
 	  printf("Something went wrong!\n");
 	 exit(0);
 	}
 	stuff = strtok(NULL, " ");
+        free(dunElement);
       }
   }
 }
@@ -131,8 +138,65 @@ void addDungeonElement(Rooms* room, DungeonElement* element)
     }
 
 }
+/*
+void initCurses();
+    Rooms* roomSize;
+    roomSize = malloc(sizeof(Rooms*));
+    int row = 140;
+    int col = 150;
+    initscr();
+    getmaxyx(WINDOW*, row, col);
+    printw("Scrren size is: %dX%d", row, col);
+    move(2,0);
+    free(Rooms*);
 
-/*void initalCurse
-{
+/*
+void printGrids();
 
+  int y;
+  int x;
+  int w;
+  int h;
+  int posy;
+  int posx;
+  for (int i=x; i<w+x; i++) {
+        mvaddch(y, i, '#');
+    }
+
+    //THIS IS THE BUGGY LOOP
+    for (int i=y; i<h+y; i++) {
+        mvaddch(i, y, '#');
+        mvaddch(i, w+x, '#');
+    }
+
+    for (int i=x; i<=w+x; i++) {
+        mvaddch(h+y, i, '#');
+    }
+    printMsg("Printed one rectangle");
+    getchar()
+    while(input != 'q'){
+        switch(getchar()){
+        case 'w':
+        posy--;
+        break;
+        case 's':
+        posy++;
+        break;
+        case 'a':
+        posx--;
+        break;
+        case 'd':
+        posx++;
+        break;
+        default: 
+        break;
+}
+}
+
+/*void printMsg(const char* msg) {
+    int x, y;
+    getyx(stdscr, y, x);
+    mvprintw(0,0,msg);
+    move(y,x);
 }*/
+
