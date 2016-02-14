@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "util.h"
-
 void parseLine(char* path);
 void addDungeonElement(Rooms* room, DungeonElement* element);
 int main(int argc, char* argv[])
@@ -15,6 +14,7 @@ void parseLine(char* path)
   char buffer[150];
   char* stuff;
   DungeonElement* dunElement;
+  Gold* typeGold;
   int roomx;
   int roomy;
   int stuffx;
@@ -63,7 +63,6 @@ void parseLine(char* path)
 	switch(dump){
 	case 'd':
 	  dunElement = malloc(sizeof(DungeonElement));
-	
 	  switch(direction)
 	    {
 	    case 'n':
@@ -81,6 +80,7 @@ void parseLine(char* path)
 	    case 'e':
 	      dunElement->y=stuffx;
 	      dunElement->x=room[roomCount-1]->width;
+              printf("Height: %d\n", dunElement->x=room[roomCount-1]->width);
 	      break;
 	    default:
 	      printf("Something went wrong with room %d\n", roomCount);
@@ -92,6 +92,11 @@ void parseLine(char* path)
 	  room[roomCount-1]->numElements+=1;
 	  addDungeonElement(room[roomCount-1], dunElement);
 	    break;
+	case 'g':
+	typeGold = malloc(sizeof(Gold));
+	typeGold->goldY=stuffx;
+	typeGold->goldX=stuffy;
+	printf("Gold X: %d\n", typeGold->goldX=stuffy);
 	default:
 	  printf("Something went wrong!\n");
 	 exit(0);
@@ -126,3 +131,8 @@ void addDungeonElement(Rooms* room, DungeonElement* element)
     }
 
 }
+
+/*void initalCurse
+{
+
+}*/
