@@ -14,6 +14,7 @@ typedef enum Elements
   {
     WEAPON = 0,
     DOOR,
+    HERO,
     MONSTER,
     STAIR,
     POTION,

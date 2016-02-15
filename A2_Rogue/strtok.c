@@ -54,7 +54,7 @@ void parseLine(char* path)
     stuff = strtok(NULL, " ");
     while (stuff != NULL)
       {
-	if(stuff[0] != 'd')
+	if(stuff[0] != '\0')
 	  {
 	    sscanf(stuff, "%c%d%c%d", &dump, &stuffx, &comma, &stuffy);
 	    printf("dump = %c, stuffx = %d, comma = %c, stuffy = %d\n",  dump,  stuffx,  comma,  stuffy );
@@ -79,7 +79,7 @@ void parseLine(char* path)
 	      dunElement->x=stuffx;
 	      break;
 	    case 'w':
-		dunElement->y=stuffx;
+	      dunElement->y=stuffx;
 	      dunElement->x=0;
 	      break;
 	    case 'e':
@@ -103,12 +103,39 @@ void parseLine(char* path)
 	typeGold->goldX=stuffy;
 	printf("Gold X: %d\n", typeGold->goldX=stuffy);
         break;
+        case 'M':
+        dunElement->y=stuffx;
+        dunElement->x=stuffy;
+        dunElement->rep = 'M';
+        dunElement->type = MONSTER;
+        dunElement->next = NULL;
+        room[roomCount-1]->numElements+=1;
+        addDungeonElement(room[roomCount-1], dunElement);
+        break;
+        case 'h':
+        dunElement->y=stuffx;
+        dunElement->x=stuffy;
+        dunElement->rep = 'h';
+        dunElement->type = HERO;
+        dunElement->next = NULL;
+        room[roomCount-1]->numElements+=1;
+        addDungeonElement(room[roomCount-1], dunElement);
+        break;
+        case 'p':
+        dunElement->y=stuffx;
+        dunElement->x=stuffy;
+        dunElement->rep = 'p';
+        dunElement->type = POTION;
+        dunElement->next = NULL;
+        room[roomCount-1]->numElements+=1;
+        addDungeonElement(room[roomCount-1], dunElement);
+        break;
 	default:
-	  printf("Something went wrong!\n");
+	 printf("Something went wrong!\n");
 	 exit(0);
 	}
 	stuff = strtok(NULL, " ");
-        free(dunElement);
+        //free(dunElement);
       }
   }
 }
@@ -123,7 +150,7 @@ void addDungeonElement(Rooms* room, DungeonElement* element)
     {
       room->elementHead = element;
     }
-  else 
+  else
     {
       curElement = room->elementHead;
       while (curElement != NULL)
