@@ -10,12 +10,12 @@ void addDungeonElement(Rooms* room, DungeonElement* element);
 int main(int argc, char* argv[])
 {
   parseLine(argv[1]);
- // initCurses();
+  //initCurses();
 }
 void parseLine(char* path)
 {
     FILE * level;
-    char buffer[150];
+    char buffer[256];
     char* stuff;
     DungeonElement* dunElement;
     Gold* typeGold;
@@ -29,7 +29,7 @@ void parseLine(char* path)
     char comma;
     Rooms** room;
     int roomCount;
-    level = fopen(path, "r");
+    level = fopen("level.txt", "r");
     roomCount = 0;
     if(level == NULL)
     {
@@ -37,7 +37,7 @@ void parseLine(char* path)
         exit(0);
     }
     room = malloc(sizeof(Rooms*));
-    while(fgets(buffer, 150, level) != NULL);
+    while(fgets(buffer, 256, level) != NULL)
     {
         roomCount++;
         room = realloc(room, sizeof(Rooms*)*roomCount);
@@ -54,7 +54,8 @@ void parseLine(char* path)
         stuff = strtok(NULL, " ");
         while (stuff != NULL)
         {
-	    if(stuff[0] != '\0')
+	  //stuff[0] = '\0';
+	    if(stuff[0] != 'd')
 	    {
 	        sscanf(stuff, "%c%d%c%d", &dump, &stuffx, &comma, &stuffy);
 	        printf("dump = %c, stuffx = %d, comma = %c, stuffy = %d\n",  dump,  stuffx,  comma,  stuffy );
@@ -104,6 +105,12 @@ void parseLine(char* path)
 	    typeGold->goldX=stuffy;
 	    printf("Gold X: %d\n", typeGold->goldX=stuffy);
             break;
+	    case 'G':
+	    typeGold = malloc(sizeof(Gold));
+	    typeGold->goldY=stuffx;
+	    typeGold->goldX=stuffy;
+	    printf("Gold X: %d\n", typeGold->goldX=stuffy);
+	    break;
             case 'M':
             dunElement->y=stuffx;
             dunElement->x=stuffy;
@@ -131,6 +138,38 @@ void parseLine(char* path)
             room[roomCount-1]->numElements+=1;
             addDungeonElement(room[roomCount-1], dunElement);
             break;
+	    case 'w':
+	    dunElement->y=stuffx;
+	    dunElement->x=stuffy;
+	    dunElement->rep = 'w';
+	    dunElement->type = WEAPON;
+	    dunElement->next = NULL;
+	    room[roomCount-1]->numElements+=1;
+	    addDungeonElement(room[roomCount-1], dunElement);
+            case 'W':
+	    dunElement->y=stuffx;
+	    dunElement->x=stuffy;
+	    dunElement->rep = 'W';
+	    dunElement->type = WEAPON;
+	    dunElement->next = NULL;
+	    room[roomCount-1]->numElements+=1;
+	    addDungeonElement(room[roomCount-1], dunElement);
+            case 'z':
+	    dunElement->y=stuffx;
+	    dunElement->x=stuffy;
+	    dunElement->rep = 'z';
+	    dunElement->type = STAIR;
+	    dunElement->next = NULL;
+	    room[roomCount-1]->numElements+=1;
+	    addDungeonElement(room[roomCount-1], dunElement);
+	    case 'a':
+	    dunElement->y=stuffx;
+	    dunElement->x=stuffy;
+	    dunElement->rep = 'a';
+	    dunElement->type = STAIR;
+	    dunElement->next = NULL;
+	    room[roomCount-1]->numElements+=1;
+	    addDungeonElement(room[roomCount-1], dunElement);
 	    default:
 	    printf("Something went wrong!\n");
 	    exit(0);
@@ -166,8 +205,8 @@ void addDungeonElement(Rooms* room, DungeonElement* element)
     }
 
 }
-/*
-void initCurses();
+
+/*void initCurses();
     Rooms* roomSize;
     roomSize = malloc(sizeof(Rooms*));
     int row = 140;
@@ -176,7 +215,7 @@ void initCurses();
     getmaxyx(WINDOW*, row, col);
     printw("Scrren size is: %dX%d", row, col);
     move(2,0);
-    free(Rooms*);
+    free(Rooms*);*/
 
 /*
 void printGrids();
